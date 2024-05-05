@@ -1,3 +1,12 @@
+if [[ -z $STOW_FOLDERS ]]; then
+    echo "setting"
+    STOW_FOLDERS="nvim,tmux,zsh"
+fi
+
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
