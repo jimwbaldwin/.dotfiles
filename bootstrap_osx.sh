@@ -26,6 +26,7 @@ PACKAGES=(
     docker
     docker-buildx
     docker-completion
+    gcc
     gh
     git
     gnupg
@@ -37,6 +38,7 @@ PACKAGES=(
     ripgrep
     tig
     tmux
+    unzip
     yawsso
 )
 
