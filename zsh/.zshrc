@@ -120,8 +120,12 @@ if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
+# Add poetry
 export PATH="$HOME/.poetry/bin:$PATH"
+# Add tmuxifier
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+# Created by `pipx` on 2023-04-25 23:30:08
 export PATH="$PATH:$HOME/.local/bin"
 
 # Start McFly
@@ -131,6 +135,8 @@ eval "$(mcfly init zsh)"
 eval "$(fnm env --use-on-cd)"
 
 export DOTFILES=$HOME/.dotfiles
+
+export EDITOR="nvim"
 
 ##### ALIASES
 
