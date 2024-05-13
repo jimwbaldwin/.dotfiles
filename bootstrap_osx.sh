@@ -22,23 +22,29 @@ brew upgrade
 PACKAGES=(
     alfred
     awscli
+    bat
     colima
     docker
     docker-buildx
     docker-completion
+    fd
+    fzf
     gcc
     gh
     git
     gnupg
     gzip
     jq
+    lazygit
     mcfly
     neovim
+    powerlevel10k
     pyenv
     ripgrep
     tig
     tmux
     unzip
+    wget
     yawsso
 )
 
@@ -65,6 +71,12 @@ brew install --quiet --cask ${CASKS[@]}
 if test ! $(which brew); then
     echo "Installing pyenv..."
     curl -sSL https://install.python-poetry.org | python3 -
+fi
+
+
+if [ ! -d "$(bat --config-dir)/themes/" ]; then
+    echo "Getting bat themes"
+    zsh ./bat/get_themes.sh
 fi
 
 zsh ~/.dotfiles/install.sh

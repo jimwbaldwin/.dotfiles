@@ -353,6 +353,27 @@ require('lazy').setup({
         --   },
         -- },
         -- pickers = {}
+        pickers = {
+          defaults = {
+            file_ignore_patterns = {
+              'node_modules',
+              '.git',
+            },
+          },
+          find_files = {
+            hidden = true,
+            file_ignore_patterns = {
+              'node_modules',
+              '.git',
+            },
+          },
+          grep_string = {
+            additional_args = { '--hidden' },
+          },
+          live_grep = {
+            additional_args = { '--hidden' },
+          },
+        },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),

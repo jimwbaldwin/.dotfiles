@@ -138,6 +138,10 @@ export DOTFILES=$HOME/.dotfiles
 
 export EDITOR="nvim"
 
+export TMUXIFIER_LAYOUT_PATH="$HOME/.tmux-layouts"
+
+export BAT_THEME="Catppuccin Mocha"
+
 ##### ALIASES
 
 # Make vim command activate poetry if there is one
@@ -151,8 +155,38 @@ alias main="git switch main && git pull"
 alias curr="head -n 1 ~/todo"
 alias todo="nvim ~/todo"
 
+alias tm="tmuxifier"
+
+alias zshrc="source ~/.zshrc"
+
 
 ###### Source local configs that are not in git
 
 source ~/.zshrc.local
+
+
+
+
+
+##### Set up fzf
+eval "$(fzf --zsh)"
+
+# -- Use fd instead of find ini fzf --
+
+export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
+
+# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+  fd --hidden --exclude .git . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+  fd --type=d --hidden --exclude .git . "$1"
+}
+
 
