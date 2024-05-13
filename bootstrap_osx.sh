@@ -27,6 +27,7 @@ PACKAGES=(
     docker
     docker-buildx
     docker-completion
+    eza
     fd
     fzf
     gcc
@@ -41,6 +42,8 @@ PACKAGES=(
     powerlevel10k
     pyenv
     ripgrep
+    thefuck
+    tlrc
     tig
     tmux
     unzip

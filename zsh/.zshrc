@@ -128,10 +128,6 @@ eval "$(tmuxifier init -)"
 # Created by `pipx` on 2023-04-25 23:30:08
 export PATH="$PATH:$HOME/.local/bin"
 
-# Start McFly
-export HISTFILE="$HOME/.zsh_history"
-eval "$(mcfly init zsh)"
-
 eval "$(fnm env --use-on-cd)"
 
 export DOTFILES=$HOME/.dotfiles
@@ -158,7 +154,6 @@ alias todo="nvim ~/todo"
 alias tm="tmuxifier"
 
 alias zshrc="source ~/.zshrc"
-
 
 ###### Source local configs that are not in git
 
@@ -189,4 +184,35 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
+show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
+
+export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
+
+# Advanced customization of fzf options via _fzf_comprun function
+# - The first argument to the function is the name of the command.
+# - You should make sure to pass the rest of the arguments to fzf.
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    export|unset) fzf --preview "eval 'echo $'{}"         "$@" ;;
+    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
+  esac
+}
+
+
+# Set fzf ctrl+r to option+r (alt+r)
+bindkey '\er' fzf-history-widget
+
+# Start McFly after fzf so that ctrl+r is McFly
+export HISTFILE="$HOME/.zsh_history"
+eval "$(mcfly init zsh)"
+
+
+# Set up thefuck
+eval "$(thefuck --alias)"
 
