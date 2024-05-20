@@ -1,6 +1,6 @@
 if [[ -z $STOW_FOLDERS ]]; then
     echo "setting"
-    STOW_FOLDERS="fd,nvim,tmux,zsh"
+    STOW_FOLDERS="fd,nvim,ripgrep,tmux,zsh"
 fi
 
 if [[ -z $DOTFILES ]]; then

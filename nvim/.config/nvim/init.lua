@@ -368,10 +368,10 @@ require('lazy').setup({
             },
           },
           grep_string = {
-            additional_args = { '--hidden' },
+            additional_args = {},
           },
           live_grep = {
-            additional_args = { '--hidden' },
+            additional_args = {},
           },
         },
         extensions = {
