@@ -147,6 +147,7 @@ return { -- LSP Configuration & Plugins
       -- tsserver = {},
       --
 
+      jsonls = {},
       lua_ls = {
         -- cmd = {...},
         -- filetypes = { ...},
