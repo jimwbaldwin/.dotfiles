@@ -8,11 +8,9 @@ if [[ -z $DOTFILES ]]; then
 fi
 
 pushd $DOTFILES
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
+for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g"); do
     echo "stow $folder"
     stow -D $folder
     stow $folder
 done
 popd
-

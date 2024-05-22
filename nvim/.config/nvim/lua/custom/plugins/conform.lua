@@ -32,5 +32,8 @@ return { -- Autoformat
       -- is found.
       -- javascript = { { "prettierd", "prettier" } },
     },
+    shfmt = {
+      -- prepend_args = { '-i', '2' },
+    },
   },
 }
