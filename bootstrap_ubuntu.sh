@@ -1,8 +1,10 @@
 #! /bin/bash
 set -euo pipefail
 
-# apt-get update
-# apt-get upgrade
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get install build-essential zlib1g-dev libffi-dev libssl-dev libbz2-dev libreadline-dev libsqlite3-dev liblzma-dev
 
 if test ! "$(which zsh)"; then
     echo "Installing zsh..."
@@ -70,5 +72,10 @@ if [ ! -d "$(bat --config-dir)/themes/" ]; then
     zsh ./bat/get_themes.sh
 fi
 
-zsh ~/.dotfiles/install.sh
+if [ ! -d "$HOME/.tmux/plugins/tpm/" ]; then
+    echo "Installing TPM..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    echo "TPM installed. You must open tmux, source ~/.tmux.conf and then prefix+I to install plugins"
+fi
 
+zsh ~/.dotfiles/install.sh

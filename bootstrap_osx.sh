@@ -80,4 +80,10 @@ if [ ! -d "$(bat --config-dir)/themes/" ]; then
     zsh ./bat/get_themes.sh
 fi
 
+if [ ! -d "$HOME/.tmux/plugins/tpm/" ]; then
+    echo "Installing TPM..."
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    echo "TPM installed. You must open tmux, source ~/.tmux.conf and then prefix+I to install plugins"
+fi
+
 zsh ~/.dotfiles/install.sh

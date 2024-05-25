@@ -108,16 +108,18 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+fi
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-        # Mac OSX
-fi
 
 bindkey -r '^L'
 # Python pyenv set up
