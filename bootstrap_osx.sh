@@ -7,11 +7,12 @@ set -euo pipefail
 # You must have also installed the CLI tools OSX update
 #
 if [ ! -d "$HOME/.oh-my-zsh/" ]; then
+    echo "Installing OhMyZsh..."
     zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
 # Check for Homebrew, install if not installed
-if test ! $(which brew); then
+if test ! "$(which brew)"; then
     echo "Installing homebrew..."
     zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
@@ -52,8 +53,7 @@ PACKAGES=(
 )
 
 echo "Installing packages..."
-brew install --quiet ${PACKAGES[@]}
-
+brew install --quiet "${PACKAGES[@]}"
 
 CASKS=(
     alfred
@@ -68,14 +68,12 @@ CASKS=(
 )
 
 echo "Installing cask apps..."
-brew install --quiet --cask ${CASKS[@]}
+brew install --quiet --cask "${CASKS[@]}"
 
-# Check for Poetry, install if not installed
-if test ! $(which brew); then
-    echo "Installing pyenv..."
+if test ! :"$(which poetry)"; then
+    echo "Installing poetry..."
     curl -sSL https://install.python-poetry.org | python3 -
 fi
-
 
 if [ ! -d "$(bat --config-dir)/themes/" ]; then
     echo "Getting bat themes"
@@ -83,4 +81,3 @@ if [ ! -d "$(bat --config-dir)/themes/" ]; then
 fi
 
 zsh ~/.dotfiles/install.sh
-
