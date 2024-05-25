@@ -113,8 +113,13 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-bindkey -r '^L'
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+fi
 
+bindkey -r '^L'
 # Python pyenv set up
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"

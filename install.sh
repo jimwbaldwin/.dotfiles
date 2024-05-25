@@ -1,3 +1,4 @@
+#!/bin/zsh
 set -euo pipefail
 
 if [[ -z $STOW_FOLDERS ]]; then
