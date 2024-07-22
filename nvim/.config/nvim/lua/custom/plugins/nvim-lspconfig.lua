@@ -157,6 +157,14 @@ return { -- LSP Configuration & Plugins
           config = '~/.typos.toml',
         },
       },
+      yamlls = {
+        settings = {
+          yaml = {
+            keyOrdering = false,
+            format = { enable = true },
+          },
+        },
+      },
       -- clangd = {},
       -- gopls = {},
       -- rust_analyzer = {},
