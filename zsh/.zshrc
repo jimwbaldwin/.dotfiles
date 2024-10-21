@@ -164,6 +164,8 @@ alias tm="tmuxifier"
 
 alias zshrc="source ~/.zshrc"
 
+alias gprintsm='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into main and can be deleted"; done'
+alias gprunesm='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse "$branch^{tree}") -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 ###### Source local configs that are not in git
 
 source ~/.zshrc.local
@@ -225,3 +227,5 @@ eval "$(mcfly init zsh)"
 # Set up thefuck
 eval "$(thefuck --alias)"
 
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+eval "$(uv generate-shell-completion zsh)"
