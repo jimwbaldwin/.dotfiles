@@ -20,6 +20,19 @@ fi
 brew update
 brew upgrade
 
+TAPS=(
+    ankitpokhrel/jira-cli
+    cantino/mcfly
+    romkatv/powerlevel10k
+    systemmanic/yawsso
+)
+for tap in "${TAPS[@]}"; do
+    if ! brew tap | grep -q "$tap"; then
+        echo "Tapping $tap..."
+        brew tap "$tap"
+    fi
+done
+
 PACKAGES=(
     awscli
     bat
@@ -35,7 +48,7 @@ PACKAGES=(
     git
     gnupg
     gzip
-
+    jira-cli
     jq
     lazygit
     mcfly
