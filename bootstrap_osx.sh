@@ -21,7 +21,6 @@ brew update
 brew upgrade
 
 PACKAGES=(
-    alfred
     awscli
     bat
     colima
@@ -36,6 +35,7 @@ PACKAGES=(
     git
     gnupg
     gzip
+
     jq
     lazygit
     mcfly
@@ -43,6 +43,7 @@ PACKAGES=(
     powerlevel10k
     pyenv
     ripgrep
+    task
     thefuck
     tlrc
     tig
@@ -56,7 +57,6 @@ echo "Installing packages..."
 brew install --quiet "${PACKAGES[@]}"
 
 CASKS=(
-    alfred
     alt-tab
     appcleaner
     arc
