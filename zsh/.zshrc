@@ -161,9 +161,6 @@ alias vim="nvimpoetry"
 
 alias main="git switch main && git pull"
 
-alias curr="head -n 1 ~/todo"
-alias todo="nvim ~/todo"
-
 alias tm="tmuxifier"
 
 alias zshrc="source ~/.zshrc"
@@ -174,7 +171,7 @@ alias gprunesm='git checkout -q main && git for-each-ref refs/heads/ "--format=%
 
 source ~/.zshrc.local
 
-
+alias todo="jira issue list -a$(jira me) -s~Done -s~Backlog"
 
 
 
