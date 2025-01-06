@@ -122,6 +122,10 @@ fi
 
 
 bindkey -r '^L'
+
+# Enable deleting line using Ctrl-U, which is mapped to Cmd-Delete in Ghostty
+bindkey \^U backward-kill-line  # fix Ctrl-U: remove to the beginning of the line
+
 # Python pyenv set up
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
