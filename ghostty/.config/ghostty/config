@@ -1,0 +1,10 @@
+# Configs
+copy-on-select = true
+macos-option-as-alt = true
+theme = catppuccin-mocha
+
+
+### Keybindings
+
+# Delete from the current position to the start of the line
+keybind = super+backspace=esc:w
