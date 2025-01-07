@@ -75,6 +75,7 @@ CASKS=(
     arc
     fluor
     font-jetbrains-mono-nerd-font
+    ghostty
     iterm2
     obsidian
     spotify
