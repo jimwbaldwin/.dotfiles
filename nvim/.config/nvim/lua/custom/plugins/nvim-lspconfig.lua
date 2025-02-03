@@ -151,7 +151,7 @@ return { -- LSP Configuration & Plugins
         },
       },
       pyright = {},
-      tsserver = {},
+      ts_ls = {},
       typos_lsp = {
         init_options = {
           config = '~/.typos.toml',
