@@ -51,6 +51,7 @@ PACKAGES=(
     jira-cli
     jq
     lazygit
+    luarocks
     mcfly
     neovim
     powerlevel10k
