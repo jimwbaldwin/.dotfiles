@@ -170,12 +170,12 @@ alias gprunesm='git checkout -q main && git for-each-ref refs/heads/ "--format=%
 
 alias uvshell="source .venv/bin/activate"
 
-###### Source local configs that are not in git
-
-source ~/.zshrc.local
-
 alias todo="jira issue list -a$(jira me) -s~Done -s~Backlog"
 
+alias tt="taskwarrior-tui"
+
+###### Source local configs that are not in git
+source ~/.zshrc.local
 
 
 ##### Set up fzf

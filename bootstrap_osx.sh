@@ -58,6 +58,7 @@ PACKAGES=(
     pyenv
     ripgrep
     task
+    taskwarrior-tui
     thefuck
     tlrc
     tig
