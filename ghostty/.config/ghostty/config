@@ -2,7 +2,7 @@
 copy-on-select = true
 link-url = true
 macos-option-as-alt = true
-theme = catppuccin-mocha
+theme = "Catppuccin Mocha"
 shell-integration = zsh
 
 
