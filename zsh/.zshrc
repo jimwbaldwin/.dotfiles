@@ -233,3 +233,14 @@ eval "$(thefuck --alias)"
 
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
+
+
+# Automate opening MongoDB Compass as much as possible
+start_mongodb_compass() {
+    local conn_string=$(echo "$1" | sed "s/@.*:/@localhost:/")
+    conn_string="${conn_string}&tlsInsecure=true&directConnection=true"
+    open "/Applications/MongoDB Compass.app/" "$conn_string"
+}
+
+alias compass='start_mongodb_compass "$(pbpaste)"'
+
