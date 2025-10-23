@@ -40,6 +40,7 @@ PACKAGES=(
     docker
     docker-buildx
     docker-completion
+    docker-compose
     eza
     fd
     fzf
@@ -79,6 +80,7 @@ CASKS=(
     font-jetbrains-mono-nerd-font
     ghostty
     iterm2
+    mongodb-compass
     obsidian
     spotify
 )
