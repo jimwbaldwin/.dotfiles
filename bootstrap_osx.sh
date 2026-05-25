@@ -52,9 +52,10 @@ PACKAGES=(
     gzip
     jira-cli
     jq
-    lazygit
     lazydocker
+    lazygit
     luarocks
+    maccy
     mcfly
     neovim
     powerlevel10k
@@ -63,8 +64,8 @@ PACKAGES=(
     task
     taskwarrior-tui
     thefuck
-    tlrc
     tig
+    tlrc
     tmux
     unzip
     uv
