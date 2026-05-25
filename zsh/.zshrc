@@ -126,13 +126,6 @@ bindkey -r '^L'
 # Enable deleting line using Ctrl-U, which is mapped to Cmd-Delete in Ghostty
 bindkey \^U backward-kill-line  # fix Ctrl-U: remove to the beginning of the line
 
-# Python pyenv set up
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# Add poetry
-export PATH="$HOME/.poetry/bin:$PATH"
 # Add tmuxifier
 export PATH="$HOME/.tmux/plugins/tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
@@ -155,7 +148,7 @@ export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
 # Make vim command activate poetry if there is one
 nvimpoetry() {
-  poetry run nvim "$@" || (exit_code=$?; if [ "$exit_code" -eq 1 ]; then nvim "$@"; fi)
+  source .venv/bin/activate && nvim "$@" || (exit_code=$?; if [ "$exit_code" -eq 1 ]; then nvim "$@"; fi)
 }
 alias vim="nvimpoetry"
 
@@ -234,13 +227,4 @@ eval "$(thefuck --alias)"
 fpath+=~/.zfunc; autoload -Uz compinit; compinit
 eval "$(uv generate-shell-completion zsh)"
 
-
-# Automate opening MongoDB Compass as much as possible
-start_mongodb_compass() {
-    local conn_string=$(echo "$1" | sed "s/@.*:/@localhost:/")
-    conn_string="${conn_string}&tlsInsecure=true&directConnection=true"
-    open "/Applications/MongoDB Compass.app/" "$conn_string"
-}
-
-alias compass='start_mongodb_compass "$(pbpaste)"'
 

@@ -21,8 +21,6 @@ brew update
 brew upgrade
 
 TAPS=(
-    ankitpokhrel/jira-cli
-    cantino/mcfly
     romkatv/powerlevel10k
     systemmanic/yawsso
 )
@@ -34,6 +32,8 @@ for tap in "${TAPS[@]}"; do
 done
 
 PACKAGES=(
+    aws-sam-cli
+    aws-vault
     awscli
     bat
     colima
@@ -43,6 +43,7 @@ PACKAGES=(
     docker-compose
     eza
     fd
+    fnm
     fzf
     gcc
     gh
@@ -52,12 +53,13 @@ PACKAGES=(
     jira-cli
     jq
     lazygit
+    lazydocker
     luarocks
     mcfly
     neovim
     powerlevel10k
-    pyenv
     ripgrep
+    stow
     task
     taskwarrior-tui
     thefuck
@@ -65,6 +67,7 @@ PACKAGES=(
     tig
     tmux
     unzip
+    uv
     wget
     yawsso
 )
@@ -73,13 +76,12 @@ echo "Installing packages..."
 brew install --quiet "${PACKAGES[@]}"
 
 CASKS=(
-    alt-tab
     appcleaner
-    arc
+    # Conflicts with work software manager which also manages Arc
+    # arc
     fluor
     font-jetbrains-mono-nerd-font
     ghostty
-    iterm2
     mongodb-compass
     obsidian
     spotify
@@ -87,11 +89,6 @@ CASKS=(
 
 echo "Installing cask apps..."
 brew install --quiet --cask "${CASKS[@]}"
-
-if test ! :"$(which poetry)"; then
-    echo "Installing poetry..."
-    curl -sSL https://install.python-poetry.org | python3 -
-fi
 
 if [ ! -d "$(bat --config-dir)/themes/" ]; then
     echo "Getting bat themes"
@@ -104,4 +101,5 @@ if [ ! -d "$HOME/.tmux/plugins/tpm/" ]; then
     echo "TPM installed. You must open tmux, source ~/.tmux.conf and then prefix+I to install plugins"
 fi
 
+echo "Installing dotfiles..."
 zsh ~/.dotfiles/install.sh
