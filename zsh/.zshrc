@@ -171,23 +171,56 @@ alias tt="taskwarrior-tui"
 source ~/.zshrc.local
 
 
-##### Set up fzf
-eval "$(fzf --zsh)"
+##### fzf (lazy-loaded on first keypress)
+# fzf binds Ctrl+R on load; _mcfly_bind_ctrl_r restores McFly. Alt+R uses fzf history.
 
-# -- Use fd instead of find ini fzf --
+_mcfly_bind_ctrl_r() {
+  if (( ${+widgets[mcfly-history-widget]} )); then
+    bindkey -M emacs '^R' mcfly-history-widget
+    bindkey -M vicmd '^R' mcfly-history-widget
+    bindkey -M viins '^R' mcfly-history-widget
+  else
+    bindkey -M emacs '^R' mcfly-history-lazy
+    bindkey -M vicmd '^R' mcfly-history-lazy
+    bindkey -M viins '^R' mcfly-history-lazy
+  fi
+}
+
+_fzf_load() {
+  (( ${+_fzf_loaded} )) && return 0
+  eval "$(fzf --zsh)"
+  _fzf_loaded=1
+  _mcfly_bind_ctrl_r
+}
+
+_fzf_widget_lazy() {
+  local widget=$1
+  _fzf_load || return
+  zle "$widget"
+}
+
+_fzf_history_lazy() { _fzf_widget_lazy fzf-history-widget }
+_fzf_file_lazy()     { _fzf_widget_lazy fzf-file-widget }
+_fzf_cd_lazy()       { _fzf_widget_lazy fzf-cd-widget }
+
+zle -N fzf-history-lazy _fzf_history_lazy
+zle -N fzf-file-lazy _fzf_file_lazy
+zle -N fzf-cd-lazy _fzf_cd_lazy
+
+bindkey '\er' fzf-history-lazy   # Alt+R: fzf history
+bindkey '^T' fzf-file-lazy       # Ctrl+T: fzf files
+bindkey '\ec' fzf-cd-lazy       # Alt+C: fzf directories
+
+# -- Use fd instead of find in fzf --
 
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
 
-# Use fd (https://github.com/sharkdp/fd) for listing path candidates.
-# - The first argument to the function ($1) is the base path to start traversal
-# - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
   fd --hidden --exclude .git . "$1"
 }
 
-# Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
@@ -197,9 +230,6 @@ show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head
 export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
-# Advanced customization of fzf options via _fzf_comprun function
-# - The first argument to the function is the name of the command.
-# - You should make sure to pass the rest of the arguments to fzf.
 _fzf_comprun() {
   local command=$1
   shift
@@ -212,19 +242,38 @@ _fzf_comprun() {
   esac
 }
 
-
-# Set fzf ctrl+r to option+r (alt+r)
-bindkey '\er' fzf-history-widget
-
-# Start McFly after fzf so that ctrl+r is McFly
+##### McFly (lazy-loaded on first Ctrl+R)
 export HISTFILE="$HOME/.zsh_history"
-eval "$(mcfly init zsh)"
 
+_mcfly_history_lazy() {
+  eval "$(mcfly init zsh)"
+  _mcfly_bind_ctrl_r
+  zle mcfly-history-widget
+}
 
-# Set up thefuck
-eval "$(thefuck --alias)"
+zle -N mcfly-history-lazy _mcfly_history_lazy
+_mcfly_bind_ctrl_r
 
-fpath+=~/.zfunc; autoload -Uz compinit; compinit
-eval "$(uv generate-shell-completion zsh)"
+##### thefuck (lazy-loaded on first `fuck`)
+fuck() {
+  unfunction fuck
+  eval "$(thefuck --alias)"
+  fuck "$@"
+}
+
+##### completions
+fpath+=~/.zfunc
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+_uv_compinit() {
+  eval "$(uv generate-shell-completion zsh)"
+  unfunction _uv_compinit
+}
+compdef _uv_compinit uv
 
 
