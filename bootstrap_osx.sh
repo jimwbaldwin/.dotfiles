@@ -83,6 +83,7 @@ CASKS=(
     fluor
     font-jetbrains-mono-nerd-font
     ghostty
+    meetingbar
     mongodb-compass
     obsidian
     spotify
