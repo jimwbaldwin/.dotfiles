@@ -144,6 +144,8 @@ export BAT_THEME="Catppuccin Mocha"
 
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
 
+export XDG_CONFIG_HOME="$HOME/.config"
+
 ##### ALIASES
 
 # Make vim command activate poetry if there is one
