@@ -6,16 +6,14 @@ set -euo pipefail
 #
 # You must have also installed the CLI tools OSX update
 #
-if [ ! -d "$HOME/.oh-my-zsh/" ]; then
-    echo "Installing OhMyZsh..."
-    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
 
 # Check for Homebrew, install if not installed
 if test ! "$(which brew)"; then
     echo "Installing homebrew..."
-    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
 
 brew update
 brew upgrade
@@ -105,3 +103,8 @@ fi
 
 echo "Installing dotfiles..."
 zsh ~/.dotfiles/install.sh
+
+if [ ! -d "$HOME/.oh-my-zsh/" ]; then
+    echo "Installing OhMyZsh..."
+    zsh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi

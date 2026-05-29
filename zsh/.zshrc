@@ -163,7 +163,7 @@ alias gprunesm='git checkout -q main && git for-each-ref refs/heads/ "--format=%
 
 alias uvshell="source .venv/bin/activate"
 
-alias todo="jira issue list -a$(jira me) -s~Done -s~Backlog"
+alias todo='jira issue list -a$(jira me) -s~Done -s~Backlog'
 
 alias tt="taskwarrior-tui"
 
